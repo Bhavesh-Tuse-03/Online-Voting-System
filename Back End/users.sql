@@ -1,0 +1,10 @@
+CREATE DATABASE online_voting_system;
+
+CREATE TABLE users (
+    username VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    mobileNumber CHAR(10) NOT NULL,
+    voterid CHAR(10) NOT NULL UNIQUE PRIMARY KEY,
+    password VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
