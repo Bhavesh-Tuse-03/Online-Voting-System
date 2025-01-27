@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="admin_dashboard.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="logoContent">
+            <a href="index.html" class="logo"><img src="images/eci logo.png" alt=""></a>
+            <h1 class="logoName"></h1>
+        </div>
+        <nav class="navbar">
+            <a href="#voting-section">Manage Voting</a>
+            <a href="#result-section">Results</a>
+        </nav>
+        <div class="icon">
+            <i class="fas fa-user"></i>
+            <i class="fas fa-bars" id="menu-bar"></i>
+        </div>
+    </header>
+    <section id="voting-section">
+        <div>
+            <h2>Manage Voting</h2>
+            <p>
+                Welcome to Blockchain based Online Voting System! This is the admin's control center for
+                managing the voting process.
+                Here, you have the authority to start, end and conclude voting events seamlessly.
+            </p>
+            <p>
+                Start Voting:
+                Initiate the voting process effortlessly with just a few clicks. Define the parameters, set the
+                duration, and launch the voting event to enable participant engagement.
+            </p>
+            <p>
+                End Voting:
+                When the voting period concludes, finalize the process with confidence. Close the voting event and
+                access comprehensive reports detailing the results, providing valuable insights for decision-making.
+            </p>
+        </div>
+
+        <div class="image-container">
+            <img src="images/download (2).jpg" alt="Image 1">
+            <img src="images/download (3).jpg" alt="Image 2">
+            <img src="images/download (4).jpg" alt="Image 2">
+            <img src="images/images (2).jpg" alt="Image 2">
+        </div>
+        <div class="toggle-container">
+            <div class="toggle-switch">
+                <input type="checkbox" id="voting-toggle">
+                <label for="voting-toggle"></label>
+            </div>
+        </div>
+
+    </section>
+
+    <section id="result-section">
+        <div>
+            <h2>View Results</h2>
+            <p>
+                Curious to see the outcome of the voting process? Click the 'View Results' button below
+                to
+                access comprehensive insights into the voting data.
+            </p>
+            <p>
+                Discover the total number of votes cast, explore the distribution of votes across
+                options,
+                and gain valuable insights into participant preferences.
+            </p>
+            <p>
+                Gain clarity and transparency by accessing the voting results directly. Your commitment
+                to
+                data-driven decision-making empowers us to move forward with confidence, guided by the preferences
+                of our community.
+
+                Click below to uncover the outcome of the voting event and take the next steps towards progress and
+                innovation."
+            </p>
+
+            <div class="image-container">
+                <img src="images/result.jpg" alt="Image 2">
+                <img src="images/download (5).jpg" alt="Image">
+                <img src="images/download (7).jpg" alt="Image 2">
+                <img src="images/download (8).jpg" alt="Image 2">
+            </div>
+
+            <div class="btn-container">
+                <button id="view-results-btn" class="btn btn-view-results">View Results</button>
+            </div>
+
+    </section>
+
+    <script>
+        const votingToggle = document.getElementById('voting-toggle');
+        const viewResultsBtn = document.getElementById('view-results-btn');
+
+        // Function to start or end the voting process
+        async function toggleVoting(status) {
+            try {
+                const response = await fetch(status ? 'http://localhost:3000/startVoting' : 'http://localhost:3000/endVoting', {
+                    method: 'POST'
+                });
+                const data = await response.json();
+                console.log(data.message);
+                if (status) {
+                    alert('Voting started successfully!');
+                } else {
+                    alert('Voting ended successfully!');
+                }
+            } catch (error) {
+                console.error('Failed to toggle voting:', error);
+            }
+        }
+
+        // Event listener for voting toggle switch
+        votingToggle.addEventListener('change', async () => {
+            try {
+                await toggleVoting(votingToggle.checked);
+            } catch (error) {
+                console.error('Failed to toggle voting:', error);
+            }
+        });
+
+        // Event listener for view results button
+        viewResultsBtn.addEventListener('click', () => {
+            window.location.href = 'result.html'; // Redirect to results page
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Voting System - User Login</title>
+    <link rel="stylesheet" href="style1.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="logoContent">
+            <a href="#" class="logo"><img src="images/eci logo.png" alt=""></a>
+            <h1 class="logoName"></h1>
+        </div>
+    </header>
+
+    <div class="login-container">
+        <h2>Login to Vote</h2>
+        <form id="loginForm">
+            <input type="text" name="voterid" id="username" placeholder="Enter Voter Id" required pattern="[A-Za-z0-9]{1,10}">
+            <input type="password" name="password" id="password" placeholder="Password" required>
+            <input type="submit" value="Login">
+            <p>Are you a new voter? <a href="signup.html">Sign up here</a>.</p>
+        </form>
+    </div>
+
+    <script>
+        // JavaScript to enforce alphanumeric input and maximum length for username field
+        document.getElementById('username').addEventListener('input', function () {
+            this.value = this.value.replace(/[^A-Za-z0-9]/g, '');
+            if (this.value.length > 10) {
+                this.value = this.value.slice(0, 10);
+            }
+        });
+
+        // Handle form submission
+        document.getElementById('loginForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const formData = new URLSearchParams();
+            formData.append('voterid', document.getElementById('username').value);
+            formData.append('password', document.getElementById('password').value);
+            fetch('http://localhost:3000/authenticate', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.authenticated) {
+                    // Redirect user upon successful authentication
+                    window.location.href = 'E:/GITBUB 2/FinalProject/Front End/mainvote.html';
+                } else {
+                    alert('Authentication failed. Please try again.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again later.');
+            });
+        });
+    </script>
+
+</body>
+
+</html>

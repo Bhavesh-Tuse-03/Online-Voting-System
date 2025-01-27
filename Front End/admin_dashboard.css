@@ -1,0 +1,185 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+*{
+    font-family: 'Quicksand', sans-serif;
+    margin: 0; padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+    text-decoration: none;
+    text-transform: capitalize;
+    transition: .2s linear;
+}
+body {
+    background-image: url("download\ \(9\).jpg");
+    background-size: cover;
+    font-size: medium;
+    margin-top: 65px;
+    padding: 0;
+}
+
+.container {
+    margin-top: 75px;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.main-container {
+    background-color: whitesmoke;
+    padding: 20px;
+    border-radius: 10px;
+}
+section{
+    margin-bottom: 50px;
+}
+
+h2 {
+    text-align: center;
+    color: red;
+    margin-bottom: 25px;
+    /* Set title color to red */
+}
+
+p {
+    text-align: justify;
+    margin-bottom: 15px;
+    padding: 0 20px;
+    /* Added padding for better spacing */
+}
+
+.btn-container {
+    text-align: center;
+}
+
+.btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 10px;
+}
+
+.btn-view-results {
+    background-color: #28a745;
+}
+
+.toggle-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Center the toggle switch */
+}
+
+.toggle-switch {
+    width: 100px;
+    /* Increased width */
+    height: 60px;
+    /* Increased height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Center the toggle switch */
+}
+
+.toggle-switch input[type="checkbox"] {
+    display: none;
+}
+
+.toggle-switch label {
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    background-color: #ccc;
+    border-radius: 30px;
+    /* Adjusted border-radius */
+    display: flex;
+    align-items: center;
+    position: relative;
+    transition: background-color 0.3s;
+}
+
+.toggle-switch label:before {
+    content: '';
+    position: absolute;
+    width: 56px;
+    /* Adjusted width */
+    height: 56px;
+    /* Adjusted height */
+    border-radius: 28px;
+    /* Adjusted border-radius */
+    background-color: #fff;
+    top: 2px;
+    left: 2px;
+    transition: left 0.3s;
+}
+
+.toggle-switch input[type="checkbox"]:checked+label {
+    background-color: lightgreen;
+    /* Green color for 'End Voting' */
+}
+
+.toggle-switch input[type="checkbox"]:checked+label:before {
+    left: calc(100% - 58px);
+    /* Adjusted left position */
+}
+
+.toggle-switch label:after {
+    content: 'START';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #000;
+    left: 5px;
+}
+
+.toggle-switch input[type="checkbox"]:checked+label:after {
+    content: 'END';
+    left: calc(100% - 45px);
+    /* Adjusted left position */
+    color: green;
+}
+
+/* CSS for arranging images horizontally */
+.image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.image-container img {
+    width: 100%;
+    /* Set width to 100% */
+    height: auto;
+    margin: 10px;
+    /* Adjust spacing */
+}
+
+/* Style for news section */
+.news-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.news-item {
+    width: 300px;
+    height: 200px;
+    /* Fixed height for all news items */
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.news-item img {
+    width: 100%;
+    height: 100%;
+    /* Ensure images fill their containers */
+    border-radius: 5px;
+    object-fit: cover;
+    /* Maintain aspect ratio and cover container */
+}

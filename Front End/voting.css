@@ -1,0 +1,120 @@
+/* Reset basic styles for a more consistent foundation */
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+*{
+    font-family: 'Quicksand', sans-serif;
+    margin: 0; padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+    text-decoration: none;
+    text-transform: capitalize;
+    transition: .2s linear;
+}
+body,
+html {
+    margin-top: 30px;
+    padding: 0;
+    font-family: sans-serif;
+    background-image: url(images/votingbg.avif);
+}
+
+/* Main content styles */
+main {
+    padding: 40px 0;
+    /* Add some vertical padding for content breathing room */
+}
+
+.container {
+    max-width: 1024px;
+    /* Set a maximum width for a clean layout on larger screens */
+    margin: 0 auto;
+    /* Center the container horizontally */
+}
+
+/* Card styles */
+.card {
+    background-color: #fff;
+    /* White background */
+    border-radius: 4px;
+    /* Rounded corners for a modern look */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow for depth */
+    margin-bottom: 20px;
+    /* Add some spacing between cards */
+}
+
+.card-content {
+    padding: 20px;
+    font-size: 18px;
+    /* Add some padding inside the card */
+}
+
+.light-blue-text {
+    color: #3399ff;
+    /* Lighter blue text for contrast */
+}
+
+.red-text {
+    color: #d80027;
+    /* Red text for alerts */
+}
+
+/* Table styles */
+table {
+    border-radius: 5px;
+    width: 100%;
+    /* Stretch the table to full width */
+    border-collapse: collapse;
+    background-color: azure;
+    /* Remove default table borders */
+}
+
+th,
+td {
+    padding: 20px;
+    /* Increase padding for more space around content */
+    /* Add some padding for readability */
+    border: 1px solid #ddd;
+    /* Light gray borders */
+    text-align: left;
+    /* Left-align content for a clean reading experience */
+    font-size: 18px;
+    /* Increase font size */
+}
+
+th {
+    background-color: #f2f2f2;
+    /* Light gray background for headers */
+    font-weight: bold;
+    /* Bold text for emphasis */
+}
+
+.center {
+    text-align: center;
+    /* Center text within specific elements */
+}
+
+/* Buttons styles */
+.btn {
+    background-color: #3399ff;
+    /* Lighter blue for buttons */
+    color: #fff;
+    /* White text for better contrast */
+    border: none;
+    /* Remove default button borders */
+    border-radius: 4px;
+    /* Rounded corners for a modern look */
+    padding: 15px 30px;
+    /* Adjust padding for a more balanced button size */
+    cursor: pointer;
+    /* Indicate interactivity when hovering */
+    transition: background-color 0.2s ease-in-out;
+    /* Smooth transition on hover */
+    font-weight: bold;
+    /* Add some weight for emphasis */
+}
+
+.btn:hover {
+    background-color: #2eafff;
+    /* Slightly darker blue on hover */
+}

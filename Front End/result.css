@@ -1,0 +1,176 @@
+/* Reset basic styles for a more consistent foundation */
+body,
+html {
+    margin-top: 20px;
+    padding: 0;
+    font-family: sans-serif;
+    background-size: cover;
+    background-position: center;
+    background-image: url(images/resultbg.jpg);
+}
+
+/* Main content styles */
+main {
+    padding: 40px 0;
+    /* Add some vertical padding for content breathing room */
+}
+main h2{
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 22px;
+    margin-left: 10px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+}
+
+
+.container {
+    max-width: 1024px;
+    /* Set a maximum width for a clean layout on larger screens */
+    margin: 0 auto;
+    /* Center the container horizontally */
+}
+
+/* Card styles */
+.card {
+    background-color: #fff3a2;
+    /* White background */
+    border-radius: 4px;
+    /* Rounded corners for a modern look */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow for depth */
+    margin-bottom: 20px;
+    /* Add some spacing between cards */
+}
+
+.card-content {
+    padding: 10px;
+    font-size: 12px;
+    /* Add some padding inside the card */
+}
+
+.light-blue-text {
+    color: #3399ff;
+    /* Lighter blue text for contrast */
+}
+
+.red-text {
+    color: #0084ff;
+    /* Red text for alerts */
+}
+
+/* Table styles */
+table {
+    border-radius: 5px;
+    width: 100%;
+    /* Stretch the table to full width */
+    border-collapse: collapse;
+    background-color: azure;
+    /* Remove default table borders */
+}
+
+th,
+td {
+    padding: 20px; /* Increase padding for more space around content */
+    /* Add some padding for readability */
+    border: 1px solid #ddd;
+    /* Light gray borders */
+    text-align: left;
+    /* Left-align content for a clean reading experience */
+    font-size: 18px; /* Increase font size */
+}
+
+th {
+    background-color: #f2f2f2;
+    /* Light gray background for headers */
+    font-weight: bold;
+    /* Bold text for emphasis */
+}
+.apple {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.apple-row {
+    max-width: 800px; /* Adjust maximum width as needed */
+}
+
+.banana {
+    width: 300px; /* Set width of the box */
+    padding: 20px; /* Add padding */
+    background-color: #fff; /* White background */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+    margin-bottom: 20px;
+}
+
+.img {
+    text-align: center; /* Center image horizontally */
+}
+
+.apple-content {
+    text-align: center; /* Center content horizontally */
+}
+
+.apple-content h3 {
+    color: #333; /* Dark text color */
+}
+
+.apple-content h2 {
+    color: #333; /* Dark text color */
+}
+.apple-content p {
+    color: #666;
+    font-weight: bold; /* Medium text color */
+}
+.apple .apple-row .img img{
+    height: 120px;
+    width: 140px;
+}
+
+.center {
+    text-align: center;
+    /* Center text within specific elements */
+}
+/* Style for the sort button */
+#sort-button,
+#print-button {
+    display: block;
+    margin: 0 auto 20px;
+    background-color: #3399ff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 15px 30px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    font-weight: bold;
+}
+
+#sort-button:hover,
+#print-button:hover {
+    background-color: #007bff;
+}
+/* Styles for the bar chart */
+.bar {
+    margin-bottom: 10px;
+}
+
+.bar-label {
+    font-weight: bold;
+    font-size: 14px;
+    color: #ff9393;
+}
+
+.bar-graph {
+    background-color: #f2f2f2;
+    border-radius: 5px;
+    height: 20px;
+}
+
+.bar-fill {
+    height: 20px;
+    background-color: #dbafff;
+    border-radius: 5px;
+}

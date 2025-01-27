@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Voting System - Admin Login</title>
+    <link rel="stylesheet" href="style_admin.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="logoContent">
+            <a href="#" class="logo"><img src="images/eci logo.png" alt=""></a>
+            <h1 class="logoName"></h1>
+        </div>
+    </header>
+
+    <div class="login-container">
+        <h2>Login as Admin</h2>
+        <form id="loginForm">
+            <input type="text" name="username" id="username" placeholder="Username" required pattern="[A-Za-z0-9]{1,10}">
+            <input type="password" name="password" placeholder="Password" required>
+            <input type="submit" value="Login">
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async function (event) {
+            event.preventDefault(); // Prevent default form submission
+            const formData = new FormData(this); // Get form data
+            const formDataJson = Object.fromEntries(formData.entries()); // Convert form data to JSON
+
+            try {
+                const response = await fetch('http://localhost:3000/authenticateAdmin', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formDataJson)
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.authenticated) {
+                        // Redirect to admin dashboard or perform other actions
+                        window.location.href = 'admin_dashboard.html';
+                    } else {
+                        alert('Invalid username or password');
+                    }
+                } else {
+                    throw new Error('Failed to authenticate admin');
+                }
+            } catch (error) {
+                console.error(error);
+                alert('Failed to authenticate admin');
+            }
+        });
+    </script>
+
+</body>
+
+</html>

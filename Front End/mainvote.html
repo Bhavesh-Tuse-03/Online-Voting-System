@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Online Voting System - Voting Dashboard</title>
+  <link rel="stylesheet" href="voting.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header class="header">
+    <div class="logoContent">
+        <a href="#" class="logo"><img src="images/eci logo.png" alt=""></a>
+        <h1 class="logoName"></h1>
+    </div>
+</header>
+
+  <main>
+    <div class="container">
+      <div id="card-alert" class="card light-blue lighten-5">
+        <div class="card-content red-text">
+          <p id="loc_info">Disclaimer: Cast your vote to a Worthy candidate </p>
+        </div>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Election Symbol</th>
+            <th>Party</th>
+            <th>Candidate Name</th>
+            <th>Vote</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td><img src="images/bjp.png" alt=" " height="42" width="42"></td>
+            <td>Bharatiya Janata Party</td>
+            <td id="cand1">Yash Thorve</td>
+            <td><button id="vote1" class="btn waves-effect waves-light" type="submit" name="action"
+                onclick="voteForCandidate(1)">Vote
+              </button></td>
+          </tr>
+          <tr>
+            <td><img src="images/cong.png" alt=" " height="42" width="42"></td>
+            <td>Indian National Congress</td>
+            <td id="cand2">Rohan Shinde</td>
+            <td><button id="vote2" class="btn waves-effect waves-light" type="submit" name="action"
+                onclick="voteForCandidate(2)">Vote
+
+              </button></td>
+          </tr>
+          <tr>
+            <td><img src="images/rsc.png" alt=" " height="42" width="42"></td>
+            <td>Nationalist Congress Party</td>
+            <td id="cand3">Vishwajeet Tulse</td>
+            <td><button id="vote3" class="btn waves-effect waves-light" type="submit" name="action"
+                onclick="voteForCandidate(3)">Vote
+
+              </button></td>
+          </tr>
+          <tr>
+            <td><img src="images/shiv.png" alt=" " height="42" width="42"></td>
+            <td>Shiv Sena</td>
+            <td id="cand4">Bhavesh Tuse</td>
+            <td><button id="vote4" class="btn waves-effect waves-light" type="submit" name="action"
+                onclick="voteForCandidate(4)">Vote
+
+              </button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+  <footer class="footer" id="contact">
+    <!-- Add your footer content here -->
+  </footer>
+
+  <!-- Add your script tags here -->
+  <script>
+    async function voteForCandidate(candidateId) {
+      const candidateName = getCandidateName(candidateId);
+      const confirmation = confirm("Confirm your vote for " + candidateName + "");
+      if (confirmation) {
+        try {
+          const response = await fetch('http://localhost:3000/voteForCandidate', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ candidate: candidateName })
+          });
+          if (response.ok) {
+            alert("Vote cast successfully");
+            window.location.href = 'index.html';
+          } else {
+            throw new Error('Failed to cast vote');
+          }
+        } catch (error) {
+          console.error(error);
+          alert('Failed to cast vote');
+        }
+      }
+    }
+
+    function getCandidateName(candidateId) {
+      let candidateName = "";
+      switch (candidateId) {
+        case 1:
+          candidateName = "Yash Thorve";
+          break;
+        case 2:
+          candidateName = "Rohan Shinde";
+          break;
+        case 3:
+          candidateName = "Vishwajeet Tulse";
+          break;
+        case 4:
+          candidateName = "Bhavesh Tuse";
+          break;
+      }
+      return candidateName;
+    }
+  </script>
+</body>
+
+</html>

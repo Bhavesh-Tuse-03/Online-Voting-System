@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Voting System - Results Dashboard</title>
+    <link rel="stylesheet" href="result.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="logoContent">
+            <a href="#" class="logo"><img src="images/eci logo.png" alt=""></a>
+            <h1 class="logoName"></h1>
+        </div>
+    </header>
+
+    <main>
+
+        <h2>Adjourned Poll Election to Assembly Constituency: Trends & Results</h2>
+
+        <div>
+            <div id="card-alert" class="card light-blue lighten-5">
+                <div class="card-content red-text">
+                    <p id="loc_info">Disclaimer: ECI is displaying the information as being filled in the system by the
+                        Returning Officers from their respective Counting Centres.The final data for each AC/PC will be
+                        shared in Form-20.</p>
+                </div>
+            </div>
+
+            <section class="apple">
+                <div class="swiper apple-row">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide banana">
+                            <div class="apple-content" id="winner-info">
+                            </div>
+
+                            <div class="img" id="winner-img">
+                            </div>
+                        </div>
+                    </div>
+            </section>
+
+            <section>
+                <table id="voting-results">
+                    <thead>
+                        <tr>
+                            <th>Party Name</th>
+                            <th>Candidate Name</th>
+                            <th>Vote Percentage</th>
+                            <th>Total Votes</th> <!-- New column for total votes -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Sort button -->
+            <button id="sort-button">Sort Table</button>
+
+            <section>
+                <div class="chart-container" id="bar-chart-container"></div>
+            </section>
+
+
+            <button id="print-button">Print Results</button>
+    </main>
+    <script>
+        // Function to sort the table
+        function sortTable() {
+            var table = document.getElementById("voting-results");
+            var tbody = table.getElementsByTagName("tbody")[0];
+            var rows = tbody.getElementsByTagName("tr");
+            var rowsArray = Array.from(rows);
+
+            rowsArray.sort((rowA, rowB) => {
+                var votesA = parseInt(rowA.cells[3].textContent); // Index 3 for total votes
+                var votesB = parseInt(rowB.cells[3].textContent); // Index 3 for total votes
+                return votesB - votesA;
+            });
+
+            rowsArray.forEach(row => {
+                tbody.appendChild(row);
+            });
+
+            updateBarChart(rowsArray);
+
+            // Find the winner after sorting
+            var winnerRow = rowsArray[0];
+            var partyName = winnerRow.cells[0].textContent;
+            var candidateName = winnerRow.cells[1].textContent;
+
+            // Update winner info
+            var winnerInfo = document.getElementById("winner-info");
+            winnerInfo.innerHTML = `
+                <h3>Pune</h3>
+                <h2>Won</h2>
+                <h2>${candidateName}</h2>
+                <p>${partyName}</p>
+            `;
+            var winnerImg = document.getElementById("winner-img");
+            winnerImg.innerHTML = `
+                <img src="images/winner.png">
+            `;
+        }
+
+        // Function to update the bar chart
+        function updateBarChart(rows) {
+            var chartContainer = document.getElementById("bar-chart-container");
+            chartContainer.innerHTML = "";
+
+            rows.forEach(row => {
+                var partyName = row.cells[0].textContent;
+                var votePercentage = parseFloat(row.cells[2].textContent);
+                var totalVotes = parseInt(row.cells[3].textContent);
+
+                var bar = document.createElement("div");
+                bar.className = "bar";
+                bar.innerHTML = `
+            <div class="bar-label">${partyName} (${votePercentage.toFixed(2)}%)</div>
+            <div class="bar-graph">
+                <div class="bar-fill" style="width: ${votePercentage.toFixed(2)}%;"></div>
+            </div>
+        `;
+                chartContainer.appendChild(bar);
+            });
+        }
+
+        // Add event listener to the sort button
+        document.getElementById("sort-button").addEventListener("click", sortTable);
+
+        document.getElementById("print-button").addEventListener("click", function () {
+            window.print(); // Print the current page
+        });
+
+        // Fetch data from the backend and update the table on page load
+        async function fetchDataAndUpdateTable() {
+            try {
+                const candidates = [
+                    { name: 'Yash Thorve', partyName: 'Bharatiya Janata Party'},
+                    { name: 'Rohan Shinde', partyName: 'Indian National Congress'},
+                    { name: 'Vishwajeet Tulse', partyName: 'Nationalist Congress Party'},
+                    { name: 'Bhavesh Tuse', partyName: 'Shiv Sena'}
+                ];
+
+                for (const candidate of candidates) {
+                    const response = await fetch(`http://localhost:3000/totalVotesFor?candidate=${encodeURIComponent(candidate.name)}`);
+                    const data = await response.json();
+
+                    const votePercentage = (data.totalVotes / data.numberOfVotes) * 100;
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${candidate.partyName}</td>
+                        <td>${candidate.name}</td>
+                        <td>${votePercentage.toFixed(2)}</td>
+                        <td>${data.totalVotes}</td>
+                    `;
+
+                    document.querySelector('#voting-results tbody').appendChild(row);
+                }
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+
+        // Fetch data and update the table on page load
+        fetchDataAndUpdateTable();
+    </script>
+</body>
+
+</html>
